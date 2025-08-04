@@ -48,6 +48,21 @@ def _kth_to_last(head: Optional[Node], k: int, idx: list) -> Optional[Node]:
         return head
     return node
 
+# SOLUTION 3: iterative
+def nth_to_last(head: Optional[Node], k: int) -> Optional[Node]:
+    p1, p2 = head, head
+
+    for _ in range(k):
+        if not p1:
+            return None
+        p1 = p1.next
+
+    while p1 and p2:
+        p1 = p1.next
+        p2 = p2.next
+
+    return p2
+
 if __name__ == '__main__':
     ll = LinkedList()
     for n in [4, 5, 3, 10, 1, 7]:
@@ -59,4 +74,6 @@ if __name__ == '__main__':
     assert node is not None
     assert node.val == 10
 
-
+    node = nth_to_last(ll.head, 3)
+    assert node is not None
+    assert node.val == 10
